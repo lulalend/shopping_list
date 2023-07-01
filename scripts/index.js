@@ -7,7 +7,8 @@ const appSettings = {
 }
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const shoppingListInDB = ref(database, 'shoppingList')
+const UUID = window.crypto.randomUUID();
+const shoppingListInDB = ref(database, `shoppingList/${UUID}`);
 
 const addBtnEl = document.getElementById('add-button');
 const inputEl = document.getElementById('input-field');
@@ -48,7 +49,7 @@ const appendItemToList = item => {
     const newEl = document.createElement('li');
     newEl.innerText = itemValue;
     newEl.addEventListener('dblclick', () => {
-       const exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+       const exactLocationOfItemInDB = ref(database, `shoppingList/${UUID}/${itemID}`);
        remove(exactLocationOfItemInDB);
     });
 
