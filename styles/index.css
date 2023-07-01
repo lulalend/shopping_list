@@ -102,7 +102,7 @@ ul {
 }
 
 #shopping-list li {
-    max-width: 90px;
+    max-width: 200px;
     padding: 20px;
 
     display: flex;
