@@ -7,8 +7,16 @@ const appSettings = {
 }
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const UUID = window.crypto.randomUUID();
+let UUID = null;
+if ( !document.cookie.split(';').some(c => {
+        return c.trim().startsWith('SESSION_ID' + '=');})) {
+    UUID = window.crypto.randomUUID();
+    document.cookie = `SESSION_ID=${UUID}`;
+} else {
+    UUID = `; ${document.cookie}`.split('; SESSION_ID=')[1];
+}
 const shoppingListInDB = ref(database, `shoppingList/${UUID}`);
+
 
 const addBtnEl = document.getElementById('add-button');
 const inputEl = document.getElementById('input-field');
