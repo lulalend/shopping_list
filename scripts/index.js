@@ -22,12 +22,10 @@ const addBtnEl = document.getElementById('add-button');
 const inputEl = document.getElementById('input-field');
 const shoppingListEl = document.getElementById('shopping-list');
 
-addBtnEl.addEventListener('click', () => {
-    let inputValue = inputEl.value;
-    if (inputValue) {
-        push(shoppingListInDB, inputValue);
-        clearInputEl(inputEl);
-    }
+addBtnEl.addEventListener('click', () => addItem());
+
+inputEl.addEventListener('keydown', e => {
+    if (e.code === 'Enter') addItem();
 });
 
 onValue(shoppingListInDB, snapshot => {
@@ -45,8 +43,14 @@ onValue(shoppingListInDB, snapshot => {
     }
 });
 
+const addItem = () => {
+    let inputValue = inputEl.value;
+    if (inputValue) {
+        push(shoppingListInDB, inputValue);
+        clearInputEl(inputEl);
+    }
+}
 const clearInputEl = element => element.value = '';
-
 
 const clearElement = element => element.innerHTML = '';
 
