@@ -11,19 +11,30 @@ let UUID = null;
 if ( !document.cookie.split(';').some(c => {
         return c.trim().startsWith('SESSION_ID' + '=');})) {
     UUID = window.crypto.randomUUID();
-    document.cookie = `SESSION_ID=${UUID}`;
+    let date = new Date();
+    let days = 400;
+    date.setTime(+ date + (days * 86400000));
+    document.cookie = `SESSION_ID=${UUID}; expires=${date.toGMTString()}`;
 } else {
     UUID = `; ${document.cookie}`.split('; SESSION_ID=')[1];
 }
 const shoppingListInDB = ref(database, `shoppingList/${UUID}`);
 
-
+const infoButtonEl = document.getElementById('info');
+const infoModalWindowEl = document.getElementById('modal-window-info');
 const addBtnEl = document.getElementById('add-button');
 const inputEl = document.getElementById('input-field');
 const shoppingListEl = document.getElementById('shopping-list');
 
+infoModalWindowEl.addEventListener('click', () => {
+    infoModalWindowEl.classList.remove('active');
+    document.querySelector("html").style.overflowY = "auto";
+});
+infoButtonEl.addEventListener('click', (e) => {
+    infoModalWindowEl.classList.add('active');
+    document.querySelector("html").style.overflowY = "hidden";
+});
 addBtnEl.addEventListener('click', () => addItem());
-
 inputEl.addEventListener('keydown', e => {
     if (e.code === 'Enter') addItem();
 });
