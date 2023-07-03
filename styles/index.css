@@ -21,6 +21,7 @@
     padding: 0;
     font-family: 'Rubik', sans-serif;
     background-color: var(--color-primary);
+    user-select: none;
 }
 
 input, button, #shopping-list li, #info, .modal-window #help {
@@ -58,7 +59,6 @@ button {
     box-shadow: var(--shadow);
     transition: var(--transition);
     cursor: pointer;
-    user-select: none;
 }
 
 button:hover, #shopping-list li:hover, #info:hover {
@@ -97,7 +97,7 @@ ul {
 .modal-window #help {
     width: 400px;
     height: 170px;
-    margin: 20% auto;
+    margin: 200px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,7 +124,6 @@ ul {
     border-radius: 50px;
     transition: var(--transition);
     cursor: pointer;
-    user-select: none;
 }
 
 #main-container {
@@ -133,7 +132,6 @@ ul {
 
     display: flex;
     flex-direction: column;
-    user-select: none;
 }
 
 #main-image {
